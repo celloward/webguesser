@@ -1,8 +1,17 @@
 <html>
   <head></head>
   <body>
+    <form>
+      <input type="text" name="guess" />
+      <input type="submit" value="Guess!" />
+    </form>
     <p>
+      <%= result %>
+    </p>
+    <p>
+    <% if result == "Correct!" %>
       The secret number is <%= secret_num %>
+    <% end %>
     </p>
   </body>
 </html>
