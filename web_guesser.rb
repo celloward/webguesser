@@ -3,6 +3,7 @@ require "sinatra/reloader"
 
 SECRET_NUM = rand(101)
 result = nil
+color = "white"
 
 def check_guess guess
   if guess.to_i > SECRET_NUM
@@ -22,8 +23,19 @@ def check_guess guess
   end 
 end
 
+def colorize result
+  if result.match(/Correct/)
+    color = "green"
+  elsif result.match(/Way/)
+    color = "red"
+  else
+    color = "yellow"
+  end
+end
+
 get "/" do
   guess = params["guess"]
   result = check_guess(guess)
-  erb :index, :locals => {:secret_num => SECRET_NUM, :result => result}
+  color = colorize(result)
+  erb :index, :locals => {:secret_num => SECRET_NUM, :result => result, :color => color}
 end
