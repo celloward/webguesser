@@ -8,16 +8,20 @@
   </head>
   <body>
     <form>
+    <% if result == "Correct!" %>
+      You guessed it! The secret number is <%= secret_num %>
+      <p><input type="submit" value="Play Again!" ></p>
+    <% elsif guesses == 0 %>
+      Out of guesses.
+      <p><input type="submit" value="Play Again!" ></p>
+    <% else %>
       <input type="text" name="guess" />
       <input type="submit" value="Guess!" />
-    </form>
-    <p>
-      <%= result %>
-    </p>
-    <p>
-    <% if result == "Correct!" %>
-      The secret number is <%= secret_num %>
+      <p>
+        <%= result %>
+        You have <%= guesses %> guesses left.
+      </p>
     <% end %>
-    </p>
+    </form>
   </body>
 </html>
