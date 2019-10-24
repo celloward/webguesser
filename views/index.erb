@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <style>
+      body {  
+        background: <%= color %>;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+    <% if result == "Correct!" %>
+      You guessed it! The secret number is <%= secret_num %>
+      <p><input type="submit" value="Play Again!" ></p>
+    <% elsif guesses == 0 %>
+      Out of guesses.
+      <p><input type="submit" value="Play Again!" ></p>
+    <% else %>
+      <input type="text" name="guess" />
+      <input type="submit" value="Guess!" />
+      <p>
+        <%= result %>
+        You have <%= guesses %> guesses left.
+      </p>
+    <% end %>
+    </form>
+  </body>
+</html>
