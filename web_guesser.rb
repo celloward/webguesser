@@ -39,13 +39,11 @@ class WebGuesser
     end
   end
 
-  def game_status result
-    if @@guesses_left == 0 || result.match(/Correct/)
-      @secret_num = rand(101)
-      @@guesses_left = 6
-      color = "white"
-      result = nil
-    end
+  def reset
+    @secret_num = rand(101)
+    @@guesses_left = 6
+    color = "white"
+    result = nil
   end
 end
 
@@ -60,6 +58,10 @@ get "/" do
   guess = params["guess"]
   result = game.check_guess(guess)
   color = game.colorize(result)
-  game.game_status(result)
   erb :index, :locals => {:secret_num => @secret_num, :result => result, :color => color, :guesses => @@guesses_left}
+end
+
+post "/domethod" do
+    game.reset
+    redirect "/"
 end

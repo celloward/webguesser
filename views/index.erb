@@ -10,10 +10,8 @@
     <form>
     <% if result == "Correct!" %>
       You guessed it! The secret number is <%= secret_num %>
-      <p><input type="submit" value="Play Again!" ></p>
     <% elsif guesses == 0 %>
       Out of guesses.
-      <p><input type="submit" value="Play Again!" ></p>
     <% else %>
       <input type="text" name="guess" />
       <input type="submit" value="Guess!" />
@@ -23,5 +21,11 @@
       </p>
     <% end %>
     </form>
+    <% if result == "Correct!" || guesses == 0 %>
+      <form method="post" action="/domethod" >
+        <input type="hidden" name="replay" value=true>
+        <input class="btn btn-primary" type="submit" value="Play again!">
+      </form>
+    <% end %>  
   </body>
 </html>
