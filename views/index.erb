@@ -7,11 +7,12 @@
     </style>
   </head>
   <body>
+    <p>What number am I thinking of?</p>
     <form>
     <% if result == "Correct!" %>
       You guessed it! The secret number is <%= secret_num %>
     <% elsif guesses == 0 %>
-      Out of guesses.
+      Game over! You are out of guesses.
     <% else %>
       <input type="text" name="guess" />
       <input type="submit" value="Guess!" />
