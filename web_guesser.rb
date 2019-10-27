@@ -6,31 +6,37 @@ class WebGuesser
 
   def initialize
     @secret_num = rand(101)
-    result = nil
     color = "white"
+  end
+
+  def sanitize guess
+    if guess
+      guess.match(/d?/) ? guess.to_i : nil 
+    end
   end
 
   def check_guess guess
     @@guesses_left -= 1
-    if guess.to_i > @secret_num
-      result = "Too high!"
-    elsif guess.to_i < @secret_num
-      result = "Too low!"
-    elsif guess.to_i == @secret_num
-      result = "Correct!"
-    else
-      result = "Not a valid guess. Please enter an integer between 0 and 100"
+    result = nil
+    if guess  
+      if guess > @secret_num
+        result = "Too high!"
+      elsif guess < @secret_num
+        result = "Too low!"
+      elsif guess == @secret_num
+        result = "Correct!"
+      end
+      if (guess - @secret_num).abs > 5
+        result = "Way " + result.downcase
+      end
     end
-
-    if (guess.to_i - @secret_num).abs > 5
-      result = "Way " + result.downcase
-    else
-      result
-    end 
+    result
   end
 
   def colorize result
-    if result.match(/Correct/)
+    if result.nil?
+      color = "white"
+    elsif result.match(/Correct/)
       color = "green"
     elsif result.match(/Way/)
       color = "red"
@@ -42,7 +48,6 @@ class WebGuesser
   def reset
     @secret_num = rand(101)
     @@guesses_left = 6
-    color = "white"
     result = nil
   end
 end
@@ -55,7 +60,7 @@ before do
 end
 
 get "/" do
-  guess = params["guess"]
+  guess = game.sanitize(params["guess"])
   result = game.check_guess(guess)
   color = game.colorize(result)
   erb :index, :locals => {:secret_num => @secret_num, :result => result, :color => color, :guesses => @@guesses_left}

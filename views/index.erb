@@ -7,14 +7,14 @@
     </style>
   </head>
   <body>
-    <p>What number am I thinking of?</p>
+    <h2>What number am I thinking of?</h2>
     <form>
     <% if result == "Correct!" %>
       You guessed it! The secret number is <%= secret_num %>
     <% elsif guesses == 0 %>
       Game over! You are out of guesses.
     <% else %>
-      <input type="text" name="guess" />
+      <input type="text" name="guess" autofocus="autofocus" />
       <input type="submit" value="Guess!" />
       <p>
         <%= result %>
