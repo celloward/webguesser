@@ -1,6 +1,7 @@
 # WebGuesser
-<img src="./webguesser-shot.png" alt="Game play screenshot" />
 An internet app guessing game made in Sinatra.
+
+<img src="./webguesser-shot.png" alt="Game play screenshot" />
 
 ## Installation
   * Prerequisites:
@@ -11,7 +12,7 @@ An internet app guessing game made in Sinatra.
 ## Usage
 For local use:
   * From inside the root cloned folder in the terminal enter `ruby web_guesser.rb`
-  * Open internet browser and enter into url `localhost:4567/`
+  * Open internet browser and enter url `localhost:4567/`
   * Play the game.
   * To stop the internal server, press `Ctl + C` or `Cmd + C` in the terminal.
 
