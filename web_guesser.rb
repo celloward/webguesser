@@ -5,20 +5,19 @@ class WebGuesser
   attr_reader :secret_num
 
   def initialize
-    @secret_num = rand(101)
-    color = "white"
+    @secret_num = rand(100)
   end
 
   def sanitize guess
     if guess
-      guess.match(/d?/) ? guess.to_i : nil 
+      guess.match(/^\d\d?$/) ? guess.to_i : nil 
     end
   end
 
   def check_guess guess
-    @@guesses_left -= 1
     result = nil
-    if guess  
+    if guess && @@guesses_left > 0
+      @@guesses_left -= 1  
       if guess > @secret_num
         result = "Too high!"
       elsif guess < @secret_num
@@ -26,8 +25,8 @@ class WebGuesser
       elsif guess == @secret_num
         result = "Correct!"
       end
-      if (guess - @secret_num).abs > 5
-        result = "Way " + result.downcase
+      if (guess - @secret_num).abs > 5 
+        result = "Way " + result.downcase 
       end
     end
     result
@@ -46,13 +45,13 @@ class WebGuesser
   end
 
   def reset
-    @secret_num = rand(101)
-    @@guesses_left = 6
+    @secret_num = rand(100)
+    @@guesses_left = 5
     result = nil
   end
 end
 
-@@guesses_left = 6
+@@guesses_left = 5
 game = WebGuesser.new
 
 before do

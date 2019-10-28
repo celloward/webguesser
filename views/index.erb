@@ -14,6 +14,7 @@
     <% elsif guesses == 0 %>
       Game over! You are out of guesses.
     <% else %>
+      <p><em>Pick a number between 0 and 99</em></p>
       <input type="text" name="guess" autofocus="autofocus" />
       <input type="submit" value="Guess!" />
       <p>
@@ -24,8 +25,7 @@
     </form>
     <% if result == "Correct!" || guesses == 0 %>
       <form method="post" action="/domethod" >
-        <input type="hidden" name="replay" value=true>
-        <input class="btn btn-primary" type="submit" value="Play again!">
+        <input type="submit" value="Play again!" autofocus="autofocus" s>
       </form>
     <% end %>  
   </body>
